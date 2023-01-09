@@ -3,23 +3,22 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class History extends Model {
+    class Doctor_Clinic_Specialty extends Model {
 
         static associate(models) {
             // define association here
         }
     };
-    History.init(
+    Doctor_Clinic_Specialty.init(
         {
-            patientId: DataTypes.INTEGER,
             doctorId: DataTypes.INTEGER,
-            description: DataTypes.TEXT,
-            files: DataTypes.TEXT
+            clinicId: DataTypes.INTEGER,
+            sprcialty: DataTypes.INTEGER,
         },
         {
             sequelize,
-            modelName: 'History',
+            modelName: 'Doctor_Clinic_Specialty',
         }
     );
-    return History;
+    return Doctor_Clinic_Specialty;
 };
