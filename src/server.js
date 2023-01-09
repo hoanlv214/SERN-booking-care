@@ -1,18 +1,25 @@
 import express from 'express';
-import configViewEngine from './configs/viewEngine';
-import initWebRoute from './routes/web'
-import connection from '../configs/connnectDB'
+import bodyParser from 'body-parser';
+import configViewEngine from './config/viewEngine';
+import initWebRoute from './routes/web';
+import connectionDB from './config/connnectDB'
+
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 8080;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // setup view engine
 configViewEngine(app);
 
 // init web route
-initWebRoute(app)
+initWebRoute(app);
+
+connectionDB();
 
 app.listen(port, () => {
-    console.log(`Example app liste http://localhost:${port}`)
+    console.log(`Server listen http://localhost:${port}`)
 });

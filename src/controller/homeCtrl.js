@@ -1,28 +1,15 @@
-import connection from '../configs/connnectDB'
+import db from '../models/index';
 
+let getHomePage = async (req, res) => {
+    try {
+        let data = await db.User.findAll();
 
-let getHomePage = (rerq, res) => {
-    // logic
-    let data = []
-    // simple query
-    connection.query(
-        'SELECT * FROM `users` ',
-        function (err, results, fields) {
-            results.map((row) => {
-                data.push({
-                    id: row.id,
-                    firstName: row.firstName,
-                    lastName: row.lastName,
-                    email: row.email,
-                    address: row.address
-                })
-            });
-
-            return res.render('index.ejs', { data: JSON.stringify(data) })
-        }
-
-    );
-
+        return res.render('homePage.ejs', {
+            data: JSON.stringify(data)
+        })
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 module.exports = {
